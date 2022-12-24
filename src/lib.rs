@@ -1,4 +1,5 @@
 use postal::{Components, InitOptions, ParseAddressOptions, PostalError};
+use std::sync::MutexGuard;
 
 pub use postal::Component;
 pub use postal::Context;
@@ -13,7 +14,7 @@ pub fn make_new() -> Result<Context, PostalError> {
 }
 
 pub fn parse(
-    ctx: Context,
+    ctx: MutexGuard<Context>,
     s: &str,
 ) -> Result<Vec<(String, String)>, PostalError> {
     let mut opts = ParseAddressOptions::new();
